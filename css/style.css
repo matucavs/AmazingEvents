@@ -14,6 +14,16 @@
 .fixed-height-row {
   height: 2.5rem;
 }
+.card {
+  height: 100%; /* Altura 100% para ocupar todo el espacio disponible */
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between; */
+}
+.card-img-top {
+  max-height: 150px; /* Establece la altura máxima de la imagen */
+  object-fit: cover; /* Ajusta la imagen en el contenedor sin distorsión */
+}
 /* 
 .container {
   width: 100%; 

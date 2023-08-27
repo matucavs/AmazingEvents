@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Upcoming Events</title>
+    <title>Past Events</title>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,9 +15,12 @@
 
 <body>
     <header>
-        <nav class="navbar shadow-sm navbar-expand-lg">
+        <nav class="navbar shadow-sm navbar-expand-lg bg-dark bg-gradient">
             <a class="navbar-brand d-flex align-items-center" href="/"></a>
-            <img src="./img/amazing_brand.png" alt="aevents" width="120" height="30">
+            <div class="logo-container">
+                <h1 class="visually-hidden">Amazing Events</h1>
+                <img src="./img/amazing_brand.png" alt="aevents" width="120" height="30">
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -28,23 +31,18 @@
                 <ul class="nav gap-3 ms-md-auto mt-4 mb-lg-2 px-lg-5">
                     <li class="nav-item">
                         <a class="btn btn-primary" href="index.html" role="button">Home</a>
-                        <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="upcoming.html" role="button">Upcoming Events</a>
-                        <!-- <a class="nav-link" href="upcoming.html">Upcoming Events</a> -->
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-dark" href="#" aria-current="page" role="button">Past Events</a>
-                        <!-- <a class="nav-link" href="past.html">Past Events</a> -->
+                        <a class="btn btn-dark bg-gradient" href="#" aria-current="page" role="button">Past Events</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="contact.html" role="button">Contact</a>
-                        <!-- <a class="nav-link" href="contact.html">Contact</a> -->
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="stats.html" role="button">Stats</a>
-                        <!-- <a class="nav-link" href="stats.html">Stats</a> -->
                     </li>
                 </ul>
             </div>
@@ -65,21 +63,21 @@
                 <div class="carousel-item active">
                     <img src="./img/banner_6.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>PAST EVENTS</h5>
+                        <h2 class="display-3">PAST EVENTS</h2>
                         <p>Amazing Events</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="./img/banner_4.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>PAST EVENTS</h5>
+                        <h2 class="display-3">PAST EVENTS</h2>
                         <p>Amazing Events</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="./img/banner_3.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>PAST EVENTS</h5>
+                        <h2 class="display-3">PAST EVENTS</h2>
                         <p>Amazing Events</p>
                     </div>
                 </div>
@@ -136,92 +134,15 @@
                     <div class="input-group mb-2">
                         <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Buscar</button>
+                            <button class="btn btn-primary" type="button">Buscar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Cards 1-2 -->
-        <div class="container-fluid">
-            <div class="row flex-wrap d-xl-flex d-flex justify-content-center">
-                <!-- Tarjeta 1 -->
-                <div class="col-12 col-sm-6 mb-4 col-lg-3 col-xl-2">
-                    <div class="card">
-                        <img class="card-img-top" src="./img/img_1.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Title</h5>
-                            <p class="card-text">Description</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#myModal1">
-                                        Details
-                                    </button>
-                                </div>
-                                <small class="text-muted">$18.00</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Tarjeta 2 -->
-                <div class="col-12 col-sm-6 mb-4 col-lg-3 col-xl-2">
-                    <div class="card">
-                        <img class="card-img-top" src="./img/img_2.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Title</h5>
-                            <p class="card-text">Description</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#myModal2">
-                                        Details
-                                    </button>
-                                </div>
-                                <small class="text-muted">$18.00</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Tarjeta 3 -->
-                <div class="col-12 col-sm-6 mb-4 col-lg-3 col-xl-2">
-                    <div class="card">
-                        <img class="card-img-top" src="./img/img_3.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Title</h5>
-                            <p class="card-text">Description</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#myModal3">
-                                        Details
-                                    </button>
-                                </div>
-                                <small class="text-muted">$18.00</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Tarjeta 4 -->
-                <div class="col-12 col-sm-6 mb-4 col-lg-3 col-xl-2">
-                    <div class="card">
-                        <img class="card-img-top" src="./img/img_5.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Title</h5>
-                            <p class="card-text">Description</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#Modal5">
-                                        Details
-                                    </button>
-                                </div>
-                                <small class="text-muted">$18.00</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Cards -->
+        <div id="card-container" class="container-fluid">
+            <div class="row flex-wrap d-xl-flex d-flex justify-content-center"></div>
         </div>
     </main>
 
@@ -235,6 +156,8 @@
             <li class="me-4"><a class="text-muted" href="#"><i class="fab fa-facebook"></i></a></li>
         </ul>
     </footer>
+    <script src="./js/data.js"></script>
+    <script src="./js/past.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
         </script>

@@ -15,9 +15,12 @@
 
 <body>
     <header>
-        <nav class="navbar shadow-sm navbar-expand-lg">
+        <nav class="navbar shadow-sm navbar-expand-lg bg-dark bg-gradient">
             <a class="navbar-brand d-flex align-items-center" href="/"></a>
+            <div class="logo-container">
+                <h1 class="visually-hidden">Amazing Events</h1>
                 <img src="./img/amazing_brand.png" alt="aevents" width="120" height="30">
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -28,88 +31,95 @@
                 <ul class="nav gap-3 ms-md-auto mt-4 mb-lg-2 px-lg-5">
                     <li class="nav-item">
                         <a class="btn btn-primary" href="index.html" role="button">Home</a>
-                        <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="upcoming.html" role="button">Upcoming Events</a>
-                        <!-- <a class="nav-link" href="upcoming.html">Upcoming Events</a> -->
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="past.html" role="button">Past Events</a>
-                        <!-- <a class="nav-link" href="past.html">Past Events</a> -->
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-dark" href="#" aria-current="page" role="button">Contact</a>
-                        <!-- <a class="nav-link" href="contact.html">Contact</a> -->
+                        <a class="btn btn-dark bg-dark bg-gradient" href="#" aria-current="page"
+                            role="button">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="stats.html" role="button">Stats</a>
-                        <!-- <a class="nav-link" href="stats.html">Stats</a> -->
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
-        <section class="slide-box">
-            <!-- Carousel -->
-            <div id="carouselExampleCaptions" class="carousel slide carousel slide carousel-fade">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="./img/banner_6.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>CONTACT US</h5>
-                            <p>Amazing Events</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="./img/banner_4.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>CONTACT US</h5>
-                            <p>Amazing Events</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="./img/banner_3.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>CONTACT US</h5>
-                            <p>Amazing Events</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+
+        <!-- Carousel -->
+        <div id="carouselExampleCaptions" class="carousel slide carousel slide carousel-fade">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
             </div>
-        </section>
-        <div class="form-box">
-            <div class="container py-3">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./img/banner_6.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-3">CONTACT US</h2>
+                        <p>Amazing Events</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/banner_4.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-3">CONTACT US</h2>
+                        <p>Amazing Events</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/banner_3.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-3">CONTACT US</h2>
+                        <p>Amazing Events</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- FORM -->
+        <div class="form-box ">
+            <div class="container py-3 ">
                 <div class="row d-flex justify-content-center">
-                    <div class="col-md-6">
+                    <div class="col-md-6 shadow-lg border-bottom border-4 border-dark">
                         <div>
                             <form class="p-3 p-xl-4" method="post" data-bs-theme="light">
                                 <h4>Name</h4>
-                                <div class="mb-3"><input id="name-1" class="form-control" type="text" name="name" placeholder="Name" /></div>
+                                <div class="mb-3">
+                                    <input id="name-1" class="form-control" type="text" name="name" placeholder="Your name">
+                                </div>
                                 <h4>E-mail</h4>
-                                <div class="mb-3"><input id="email-1" class="form-control" type="email" name="email" placeholder="Email" /></div>
+                                <div class="mb-3">
+                                    <input id="email-1" class="form-control" type="email" name="email"
+                                        placeholder="Your e-mail address">
+                                </div>
                                 <h4>Message</h4>
-                                <div class="mb-3"><textarea id="message-1" class="form-control" name="message" rows="6" placeholder="Message"></textarea></div>
-                                <div><button class="btn btn-primary shadow d-block w-100" type="submit">Submit</button></div>
+                                <div class="mb-3">
+                                    <textarea id="message-1" class="form-control" name="message" rows="6"
+                                        placeholder="Message">
+                                    </textarea>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary shadow d-block w-100" type="submit">Submit</button>
+                                </div>
                             </form>
                         </div>
                     </div>
