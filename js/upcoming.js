@@ -1,12 +1,12 @@
 const cardContainer = document.getElementById("card-container");
 const currentDate = new Date(data.currentDate);
 
-data.events.some((event, eventIndex) => {
+data.events.forEach((event, eventIndex) => {
   const eventDate = new Date(event.date);
 
   if (eventDate > currentDate) {
     const cardCol = document.createElement("div");
-    cardCol.className = "col-12 col-sm-6 mb-4 col-lg-3 col-xl-2";
+    cardCol.className = "col-12 col-sm-6 mb-4 col-lg-3";
 
     const card = document.createElement("div");
     card.className = "card shadow-sm";
@@ -30,8 +30,6 @@ data.events.some((event, eventIndex) => {
 
     cardCol.appendChild(card);
     cardContainer.querySelector(".row").appendChild(cardCol);
-
-    
   }
 });
 

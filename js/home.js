@@ -1,8 +1,10 @@
 const cardContainer = document.getElementById("card-container");
 
-data.events.some((event, eventIndex) => {
-  const cardCol = document.createElement("div");
-  cardCol.className = "col-12 col-sm-6 mb-4 col-lg-3 col-xl-2";
+
+data.events.forEach((event, eventIndex) => {
+  
+  const cardNew = document.createElement("div");
+  cardNew.className = "col-12 col-sm-6 mb-4 col-lg-3";
 
   const card = document.createElement("div");
   card.className = "card shadow-sm";
@@ -24,23 +26,12 @@ data.events.some((event, eventIndex) => {
     </div>
     `;
 
-  cardCol.appendChild(card);
-  cardContainer.querySelector(".row").appendChild(cardCol);
-  // Click event
-  const detailsContainer = card.querySelector(".details-container");
-  detailsContainer.addEventListener("click", function () {
-    sessionStorage.setItem("selectedEventIndex", eventIndex);
-  });
+  cardNew.appendChild(card);
+  cardContainer.querySelector(".row").appendChild(cardNew);
 });
 
-// Delete
+// Delete col-xl-2
 // const card1 = document.getElementById("card1");
-// const card2 = document.getElementById("card2");
-// const card3 = document.getElementById("card3");
-// const card4 = document.getElementById("card4");
 
 // card1.remove();
-// card2.remove();
-// card3.remove();
-// card4.remove();
-//
+
