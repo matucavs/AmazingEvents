@@ -24,5 +24,8 @@
   max-height: 180px; 
   object-fit: cover; 
 }
+#event-Carddetails{
+  max-width: 40rem;
+}
 
 
