@@ -27,13 +27,13 @@ data.events.forEach((event, eventIndex) => {
   cardNew.appendChild(card);
   cardContainer.querySelector(".row").appendChild(cardNew);
 
-  // const detailsContainer = card.querySelector(".details-container");
-  // detailsContainer.addEventListener("click", function () {
-  //   sessionStorage.setItem("selectedEventIndex", eventIndex);
-  // });
+  const detailsContainer = card.querySelector(".details-container");
+  detailsContainer.addEventListener("click", function () {
+    sessionStorage.setItem("selectedEventIndex", eventIndex);
+  });
 });
 
-// main.js
+// home.js
 
 // Obtener el array de categorías
 const categories = [...new Set(data.events.map((event) => event.category))];
@@ -65,7 +65,7 @@ categories.forEach((category) => {
   const label = document.createElement("label");
   label.htmlFor = `category-${category}`;
   label.classList.add("form-check-label");
-  label.textContent = `Category ${category}`;
+  label.textContent = `${category}`;
 
   const checkboxDiv = document.createElement("div");
   checkboxDiv.classList.add("form-check", "form-check-inline");
@@ -128,14 +128,14 @@ function renderFilteredItems(filteredItems) {
   });
 }
 
-// Obtener el campo de búsqueda y el botón de búsqueda
+
 const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
 
-// Agregar un evento de clic al botón de búsqueda
+
 searchButton.addEventListener("click", handleSearch);
 
-// Función para manejar la búsqueda
+
 function handleSearch() {
   const searchValue = searchInput.value.toLowerCase();
   const searchTerms = searchValue.split(" ").filter((term) => term !== "");
