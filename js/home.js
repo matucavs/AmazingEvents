@@ -88,7 +88,6 @@ function handleCheckboxChange() {
   renderFilteredItems(filteredItems);
 }
 
-// Función para renderizar los elementos filtrados
 function renderFilteredItems(filteredItems) {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
