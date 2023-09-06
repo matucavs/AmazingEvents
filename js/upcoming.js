@@ -20,7 +20,7 @@ data.events.forEach((event, eventIndex) => {
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
               <div class="details-container" data-event-index="${eventIndex}">
-                <a class="btn btn-primary details-button" href="details.html" role="button">Details</a>
+                <a class="btn btn-primary details-button" href="details.html?eventIndex=${eventIndex}" role="button">Details</a>
               </div>
             </div>
               <small class="text-light">$${event.price.toFixed(2)}</small>
@@ -30,6 +30,7 @@ data.events.forEach((event, eventIndex) => {
 
     cardCol.appendChild(card);
     cardContainer.querySelector(".row").appendChild(cardCol);
+    
   }
 });
 

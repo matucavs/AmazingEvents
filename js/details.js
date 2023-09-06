@@ -45,3 +45,6 @@ function renderAssistance(assistance) {
     return '<p class="card-text">Assistance not available</p>';
   }
 }
+
+
+
