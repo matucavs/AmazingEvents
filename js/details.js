@@ -48,3 +48,18 @@ function renderAssistance(assistance) {
 
 
 
+// Obtener el array de categorías
+const categories = [...new Set(data.events.map((event) => event.category))];
+
+// Obtener el array de elementos
+const items = data.events.map((event) => ({
+  id: event._id,
+  name: event.name,
+  place: event.place,
+  image: event.image,
+  date: event.date,
+  description: event.description,
+  price: event.price,
+  capacity: event.capacity,
+  category: event.category,
+}));

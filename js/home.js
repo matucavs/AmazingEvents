@@ -43,7 +43,9 @@ const items = data.events.map((event) => ({
   id: event._id,
   name: event.name,
   place: event.place,
+  image: event.image,
   date: event.date,
+  description: event.description,
   price: event.price,
   capacity: event.capacity,
   category: event.category,
@@ -85,46 +87,66 @@ function handleCheckboxChange() {
     return checkedCategories.includes(item.category);
   });
 
-  renderFilteredItems(filteredItems);
+  if (checkedCategories.length === 0) {
+    renderFilteredItems(items);
+  } else {
+    renderFilteredItems(filteredItems);
+  }
 }
 
-function renderFilteredItems(filteredItems) {
+function renderFilteredItems(filteredItems, category, place, name) {
   const cardContainer = document.getElementById("card-container");
+  
+  if (!cardContainer) {
+    console.error("Not found");
+    return;
+  }
+  
   cardContainer.innerHTML = "";
+  
+  const cardNew = document.createElement("div");
+  cardNew.className = "col-12 col-sm-6 mb-4 col-lg-3";
 
-  filteredItems.forEach((item) => {
+  filteredItems.forEach((event, eventIndex) => {
+    if (
+      (category && event.category !== category) ||
+      (place && event.place !== place) ||
+      (name && !event.name.toLowerCase().includes(name.toLowerCase()))
+    ) {
+      return;
+    }
+    
     const card = document.createElement("div");
-    card.classList.add("card", "m-3");
+    card.className = "card m-3";
     card.style.width = "18rem";
-
-    const cardBody = document.createElement("div");
-    cardBody.classList.add("card-body");
-
-    const cardTitle = document.createElement("h5");
-    cardTitle.classList.add("card-title");
-    cardTitle.textContent = item.name;
-
-    const cardText = document.createElement("p");
-    cardText.classList.add("card-text");
-    cardText.textContent = `Place: ${item.place}, Date: ${item.date}, Capacity: ${item.capacity}, Category: ${item.category}, Price: $${item.price.toFixed(2)}`;
-
-    const detailsContainer = document.createElement("div");
-    detailsContainer.classList.add("details-container");
-    detailsContainer.dataset.eventIndex = item.eventIndex;
-
-    const button = document.createElement("a");
-    button.classList.add("btn", "btn-primary");
-    button.href = `details.html?eventIndex=${item.eventIndex}`;
-    button.role = "button";
-    button.textContent = "Details";
-
-    cardBody.appendChild(cardTitle);
-    cardBody.appendChild(cardText);
-    detailsContainer.appendChild(button);
-    cardBody.appendChild(detailsContainer);
-    card.appendChild(cardBody);
-    cardContainer.appendChild(card);
+    
+    card.innerHTML = `
+      <img class="card-img-top" src="${event.image}" alt="${event.name}">
+      <div class="card-body">
+        <h5 class="card-title">${event.name}</h5>
+        <p class="card-text">${event.description}</p>
+      </div>
+      <div class="card-footer bg-dark bg-gradient">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <div class="details-container" data-event-index="${eventIndex}">
+            <a class="btn btn-primary details-button" href="details.html?eventIndex=${eventIndex}" role="button">Details</a>
+            </div>
+          </div>
+          <small class="text-light">$${event.price.toFixed(2)}</small>
+        </div>
+      </div>
+    `;
+    
+    const detailsContainer = card.querySelector(".details-container");
+    detailsContainer.addEventListener("click", function () {
+      sessionStorage.setItem("selectedEventIndex", eventIndex);
+    });
+    
+    cardNew.appendChild(card);
   });
+
+  cardContainer.appendChild(cardNew);
 }
 
 
