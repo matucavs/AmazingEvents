@@ -1,3 +1,3 @@
 # AmazingEvents
 
-Sprint 2 Access and Display Data
+Sprint 3 Filter Data
