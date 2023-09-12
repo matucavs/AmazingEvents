@@ -35,6 +35,34 @@ function getData() {
         cardContainer.innerHTML += card;
       });
 
+      const categories = getUniqueCategories(eventData);
+
+      // Crear checkboxes con Bootstrap 5
+      const checkboxContainer = document.getElementById("checkboxContainer");
+      categories.forEach((category) => {
+        const checkboxDiv = document.createElement("div");
+        checkboxDiv.classList.add("form-check", "form-check-inline");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.classList.add("form-check-input");
+        checkbox.name = "category";
+        checkbox.value = category;
+        checkbox.id = category;
+        checkbox.addEventListener("change", () => {
+          filterByCategory(eventData);
+        });
+
+        const label = document.createElement("label");
+        label.classList.add("form-check-label");
+        label.htmlFor = category;
+        label.textContent = category;
+
+        checkboxDiv.appendChild(checkbox);
+        checkboxDiv.appendChild(label);
+        checkboxContainer.appendChild(checkboxDiv);
+      });
+
       document.getElementById("searchInput").addEventListener("input", () => {
         search(eventData);
       });
@@ -42,6 +70,29 @@ function getData() {
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+
+function getUniqueCategories(events) {
+  const categories = new Set();
+  events.forEach((event) => {
+    categories.add(event.category);
+  });
+  return Array.from(categories);
+}
+
+function filterByCategory(data) {
+  const selectedCategories = Array.from(
+    document.querySelectorAll('input[name="category"]:checked')
+  ).map((checkbox) => checkbox.value);
+  const cardContainer = document.getElementById("cardContainer");
+  cardContainer.innerHTML = "";
+
+  data.forEach((event) => {
+    if (selectedCategories.includes(event.category)) {
+      const card = generateCard(event);
+      cardContainer.innerHTML += card;
+    }
+  });
 }
 
 // SEARCH
@@ -96,10 +147,12 @@ function createNoResultsModal() {
   `;
 
   // add modal
-  document.body.insertAdjacentHTML('beforeend', modalContent);
+  document.body.insertAdjacentHTML("beforeend", modalContent);
 
   // show modal
-  var noResultsModal = new bootstrap.Modal(document.getElementById('noResultsModal'));
+  var noResultsModal = new bootstrap.Modal(
+    document.getElementById("noResultsModal")
+  );
   noResultsModal.show();
 }
 getData();
