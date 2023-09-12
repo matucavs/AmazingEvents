@@ -75,7 +75,7 @@ function getData() {
 function getUniqueCategories(events) {
   const categories = new Set();
   events.forEach((event) => {
-    categories.add(event.category);
+      categories.add(event.category);
   });
   return Array.from(categories);
 }
