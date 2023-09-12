@@ -1,202 +1,105 @@
-const cardContainer = document.getElementById("card-container");
-
-data.events.forEach((event, eventIndex) => {
-  const cardNew = document.createElement("div");
-  cardNew.className = "col-12 col-sm-6 mb-4 col-lg-3";
-
-  const card = document.createElement("div");
-  card.className = "card shadow-sm";
-  card.innerHTML = `
-      <img class="card-img-top" src="${event.image}" alt="event card">
-      <div class="card-body">
-          <h5 class="card-title">${event.name}</h5>
-          <p class="card-text">${event.description}</p>
-      </div>
-      <div class="card-footer bg-dark bg-gradient">
-    <div class="d-flex justify-content-between align-items-center">
-    <div class="btn-group">
-    <div class="details-container" data-event-index="${eventIndex}">
-      <a class="btn btn-primary details-button" href="details.html?eventIndex=${eventIndex}" role="button">Details</a>
-    </div>
-  </div>
-            <small class="text-light">$${event.price.toFixed(2)}</small>
-        </div>
-    </div>
-    `;
-
-  cardNew.appendChild(card);
-  cardContainer.querySelector(".row").appendChild(cardNew);
-
-  const detailsContainer = card.querySelector(".details-container");
-  detailsContainer.addEventListener("click", function () {
-    sessionStorage.setItem("selectedEventIndex", eventIndex);
-  });
-});
-
-// home.js
-
-// Obtener el array de categorías
-const categories = [...new Set(data.events.map((event) => event.category))];
-
-// Obtener el array de elementos
-const items = data.events.map((event) => ({
-  id: event._id,
-  name: event.name,
-  place: event.place,
-  image: event.image,
-  date: event.date,
-  description: event.description,
-  price: event.price,
-  capacity: event.capacity,
-  category: event.category,
-}));
-
-// Obtener el contenedor de los checkboxes
-const filterContainer = document.querySelector("#filter-container");
-
-// Generar los checkboxes dinámicamente
-categories.forEach((category) => {
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.id = `category-${category}`;
-  checkbox.name = "category";
-  checkbox.value = category;
-  checkbox.classList.add("form-check-input");
-  checkbox.addEventListener("change", handleCheckboxChange);
-
-  const label = document.createElement("label");
-  label.htmlFor = `category-${category}`;
-  label.classList.add("form-check-label");
-  label.textContent = `${category}`;
-
-  const checkboxDiv = document.createElement("div");
-  checkboxDiv.classList.add("form-check", "form-check-inline");
-  checkboxDiv.appendChild(checkbox);
-  checkboxDiv.appendChild(label);
-
-  filterContainer.appendChild(checkboxDiv);
-});
-
-// Función para manejar el cambio de un checkbox
-function handleCheckboxChange() {
-  const checkedCategories = [
-    ...document.querySelectorAll('input[name="category"]:checked'),
-  ].map((checkbox) => checkbox.value);
-
-  const filteredItems = items.filter((item) => {
-    return checkedCategories.includes(item.category);
-  });
-
-  if (checkedCategories.length === 0) {
-    renderFilteredItems(items);
-  } else {
-    renderFilteredItems(filteredItems);
-  }
+function generateCard(event) {
+  var card = `
+            <div class="col">
+                <div class="card h-100">
+                    <img src="${event.image}" class="card-img-top" alt="Card image">
+                    <div class="card-body">
+                        <h5 class="card-title">${event.name}</h5>
+                        <p class="card-text">${event.description}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <h6 class="text-muted">$${event.price}</h6>
+                        <a href="details.html?id=${event._id}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>`;
+  return card;
 }
 
-function renderFilteredItems(filteredItems, category, place, name) {
-  const cardContainer = document.getElementById("card-container");
-  
-  if (!cardContainer) {
-    console.error("Not found");
-    return;
-  }
-  
+//const cardContainer = document.getElementById('cardContainer');
+function getData() {
+  fetch("https://mindhub-xj03.onrender.com/api/amazing")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("La solicitud no fue exitosa");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const eventData = data.events;
+      const originalData = eventData;
+      const cardContainer = document.getElementById("cardContainer");
+
+      eventData.forEach((event) => {
+        const card = generateCard(event);
+        cardContainer.innerHTML += card;
+      });
+
+      document.getElementById("searchInput").addEventListener("input", () => {
+        search(eventData);
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+// SEARCH
+function search(data) {
+  var searchTerm = document.getElementById("searchInput").value.toLowerCase();
+  var cardContainer = document.getElementById("cardContainer");
+
   cardContainer.innerHTML = "";
-  
-  const cardNew = document.createElement("div");
-  cardNew.className = "col-12 col-sm-6 mb-4 col-lg-3";
 
-  filteredItems.forEach((event, eventIndex) => {
-    if (
-      (category && event.category !== category) ||
-      (place && event.place !== place) ||
-      (name && !event.name.toLowerCase().includes(name.toLowerCase()))
-    ) {
-      return;
-    }
-    
-    const card = document.createElement("div");
-    card.className = "card m-3";
-    card.style.width = "18rem";
-    
-    card.innerHTML = `
-      <img class="card-img-top" src="${event.image}" alt="${event.name}">
-      <div class="card-body">
-        <h5 class="card-title">${event.name}</h5>
-        <p class="card-text">${event.description}</p>
-      </div>
-      <div class="card-footer bg-dark bg-gradient">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <div class="details-container" data-event-index="${eventIndex}">
-            <a class="btn btn-primary details-button" href="details.html?eventIndex=${eventIndex}" role="button">Details</a>
-            </div>
-          </div>
-          <small class="text-light">$${event.price.toFixed(2)}</small>
-        </div>
-      </div>
-    `;
-    
-    const detailsContainer = card.querySelector(".details-container");
-    detailsContainer.addEventListener("click", function () {
-      sessionStorage.setItem("selectedEventIndex", eventIndex);
+  if (searchTerm === "") {
+    // Si el campo de búsqueda está vacío, mostrar todos los elementos
+    data.forEach(function (event) {
+      var card = generateCard(event);
+      cardContainer.innerHTML += card;
     });
-    
-    cardNew.appendChild(card);
-  });
-
-  cardContainer.appendChild(cardNew);
-}
-
-
-const searchInput = document.getElementById("searchInput");
-const searchButton = document.getElementById("searchButton");
-
-
-searchButton.addEventListener("click", handleSearch);
-searchInput.addEventListener("input", handleSearchInput);
-
-function handleSearch() {
-  const searchValue = searchInput.value.toLowerCase();
-  const searchTerms = searchValue.split(" ").filter((term) => term !== "");
-
-  const filteredItems = items.filter((item) => {
-    return searchTerms.every((term) => {
-      return (
-        item.name.toLowerCase().includes(term) ||
-        item.place.toLowerCase().includes(term) ||
-        item.date.toLowerCase().includes(term) ||
-        item.capacity.toString().includes(term) ||
-        item.category.toLowerCase().includes(term)
-      );
-    });
-  });
-
-  renderFilteredItems(filteredItems);
-  // Muestra la alerta si no se encontraron resultados
-  const noResultsAlert = document.getElementById("no-results-alert");
-  if (filteredItems.length === 0 && searchValue !== "") {
-    noResultsAlert.style.display = "block";
   } else {
-    noResultsAlert.style.display = "none";
-  }
-}
-function handleSearchInput() {
-  if (searchInput.value === "") {
-    renderFilteredItems(items); // Restablece los elementos filtrados al estado inicial
-    hideNoResultsAlert();// Oculta la alerta de no resultados
-  }
-} 
-function hideNoResultsAlert() {
-  const noResultsAlert = document.getElementById("no-results-alert");
-  noResultsAlert.style.display = "none";
-}
-function clearSearchInput() {
-  searchInput.value = ""; // Limpia el valor del campo de búsqueda
-  renderFilteredItems(items); // Restablece los elementos filtrados al estado inicial
-  hideNoResultsAlert(); // Oculta la alerta de no resultados
-}
-const clearSearchButton = document.getElementById("no-results-alert");
+    var found = false;
+    data.forEach(function (event) {
+      if (event.name.toLowerCase().includes(searchTerm)) {
+        var card = generateCard(event);
+        cardContainer.innerHTML += card;
+        found = true;
+      }
+    });
 
-clearSearchButton.addEventListener("click", clearSearchInput);
+    if (!found) {
+      createNoResultsModal();
+      document.getElementById("searchInput").value = "";
+      getData();
+    }
+  }
+}
+//MODAL FOR RESULT
+function createNoResultsModal() {
+  var modalContent = `
+      <div class="modal fade" id="noResultsModal" tabindex="-1" aria-labelledby="noResultsModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="noResultsModalLabel">No results were found</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    There were no results found for the search.
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  `;
+
+  // add modal
+  document.body.insertAdjacentHTML('beforeend', modalContent);
+
+  // show modal
+  var noResultsModal = new bootstrap.Modal(document.getElementById('noResultsModal'));
+  noResultsModal.show();
+}
+getData();

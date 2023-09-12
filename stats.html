@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home</title>
+  <title>Stats</title>
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
-      <a class="navbar-brand d-flex align-items-center" href="/"></a>
+      <a class="navbar-brand d-flex align-items-center " href="/"></a>
       <div class="logo-container">
         <h1 class="visually-hidden">Amazing Events</h1>
         <img src="./img/amazing_brand.png" alt="aevents" width="120" height="30">
@@ -48,129 +48,202 @@
     </nav>
   </header>
   <main>
-    <!-- Carousel -->
-    <div id="carouselExampleCaptions" class="carousel slide carousel slide carousel-fade">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-          aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-          aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-          aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="./img/banner_6.jpg" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="display-3">STATS</h2>
-            <p>Amazing Events</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="./img/banner_4.jpg" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="display-3">STATS</h2>
-            <p>Amazing Events</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="./img/banner_3.jpg" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="display-3">STATS</h2>
-            <p>Amazing Events</p>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-    <!-- TABLE -->
-    <div class="table-responsive table mt-2" role="grid" style="padding-left: 10px;padding-right: 10px;">
-      <table id="dataTable" class="table table-bordered my-0">
-        <thead>
-          <tr>
-            <th colspan="3">Events Statistics</th>
-          </tr>
-        </thead>
-        <tbody id="dataTable">
-          <tr>
-            <td>Events with highest % of assistance</td>
-            <td>Events with lowest % of assistance</td>
-            <td>Events with larger capacity</td>
-          </tr>
-          <tr class="fixed-height-row">
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+    <table class="table table-dark table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th>Categories</th>
+          <th>Revenues</th>
+          <th>Percentage of attendance</th>
+        </tr>
+      </thead>
+      <tbody id="eventTableBody">
+      </tbody>
+    </table>
 
-          <tr>
-            <td colspan="3">Upcoming events statistics by category</td>
-          </tr>
-          <tr>
-            <td>Categories</td>
-            <td>Revenues</td>
-            <td>Percentage of assistance</td>
-          </tr>
-          <tr class="fixed-height-row">
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="fixed-height-row">
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="3">Past events statistics by category</td>
-          </tr>
-          <tr>
-            <td>Categories</td>
-            <td>Revenues</td>
-            <td>Percentage of assistance</td>
-          </tr>
-          <tr class="fixed-height-row">
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="fixed-height-row">
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </main>
-
-
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-1 border-top">
     <div class="col-md-4 d-flex align-items-center">
-      <span class="mb-3 mb-md-0 text-muted">© 2023 Cohort 03</span>
+      <span class="mb-3 mb-md-0 text-muted ms-4">© 2023 Cohort 03</span>
     </div>
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex me-4">
       <li class="me-4"><a class="text-muted" href="#"><i class="fab fa-whatsapp"></i></a></li>
-      <li class="ms-3"><a class="text-muted" href="#"><i class="fab fa-instagram"></i></a></li>
-      <li class="ms-3"><a class="text-muted" href="#"><i class="fab fa-facebook"></i></a></li>
+      <li class="me-4"><a class="text-muted" href="#"><i class="fab fa-instagram"></i></a></li>
+      <li class="me-4"><a class="text-muted" href="#"><i class="fab fa-facebook"></i></a></li>
+      
     </ul>
   </footer>
 
-<script>
-  
-</script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-    </script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    
+    const tableBody = document.getElementById('eventTableBody');
+
+    //Fetch
+    fetch('https://mindhub-xj03.onrender.com/api/amazing/')
+      .then(response => response.json())
+      .then(data => {
+        
+        const currentDate = new Date(data.currentDate);
+        const upcomingEvents = data.events.filter(event => new Date(event.date) > currentDate);
+        const pastEvents = data.events.filter(event => new Date(event.date) <= currentDate);
+
+        
+        function addRow(category, revenues, attendance, capacity) {
+          const categoryRow = document.createElement('tr');
+
+          const categoryCell = document.createElement('td');
+          categoryCell.textContent = category;
+          categoryRow.appendChild(categoryCell);
+
+          const revenuesCell = document.createElement('td');
+          revenuesCell.textContent = '$' + revenues.toFixed(2);
+          categoryRow.appendChild(revenuesCell);
+
+          const attendanceCell = document.createElement('td');
+          const attendancePercentage = ((attendance / capacity) * 100).toFixed(2);
+          attendanceCell.textContent = attendancePercentage + '%';
+          categoryRow.appendChild(attendanceCell);
+
+          tableBody.appendChild(categoryRow);
+        }
+
+        
+        const categorizedDataUpcoming = {};
+        upcomingEvents.forEach(event => {
+          const category = event.category;
+          const assistance = event.assistance || event.estimate;
+          const price = event.price;
+          const capacity = event.capacity;
+
+          if (typeof assistance === 'number' && typeof price === 'number' && typeof capacity === 'number') {
+            const eventRevenue = assistance * price;
+
+            if (!categorizedDataUpcoming[category]) {
+              categorizedDataUpcoming[category] = { revenues: 0, attendance: 0, capacity: 0 };
+            }
+
+            categorizedDataUpcoming[category].revenues += eventRevenue;
+            categorizedDataUpcoming[category].attendance += assistance;
+            categorizedDataUpcoming[category].capacity += capacity;
+          }
+        });
+
+        
+        tableBody.innerHTML += '<tr><th colspan="3" class="text-center">Upcoming Events Statistics</th></tr>';
+        for (const category in categorizedDataUpcoming) {
+          const { revenues, attendance, capacity } = categorizedDataUpcoming[category];
+          addRow(category, revenues, attendance, capacity);
+        }
+
+        
+        const categorizedDataPast = {};
+        pastEvents.forEach(event => {
+          const category = event.category;
+          const assistance = event.assistance || event.estimate;
+          const price = event.price;
+          const capacity = event.capacity;
+
+          if (typeof assistance === 'number' && typeof price === 'number' && typeof capacity === 'number') {
+            const eventRevenue = assistance * price;
+
+            if (!categorizedDataPast[category]) {
+              categorizedDataPast[category] = { revenues: 0, attendance: 0, capacity: 0 };
+            }
+
+            categorizedDataPast[category].revenues += eventRevenue;
+            categorizedDataPast[category].attendance += assistance;
+            categorizedDataPast[category].capacity += capacity;
+          }
+        });
+
+        
+        tableBody.innerHTML += '<tr><th colspan="3" class="text-center">Past Events Statistics</th></tr>';
+        for (const category in categorizedDataPast) {
+          const { revenues, attendance, capacity } = categorizedDataPast[category];
+          addRow(category, revenues, attendance, capacity);
+        }
+
+        
+        let maxAttendancePercentage = 0;
+        let maxAttendanceEvent = null;
+        data.events.forEach(event => {
+          const assistance = event.assistance || event.estimate;
+          const capacity = event.capacity;
+
+          if (typeof assistance === 'number' && typeof capacity === 'number') {
+            const attendancePercentage = (assistance / capacity) * 100;
+            if (attendancePercentage > maxAttendancePercentage) {
+              maxAttendancePercentage = attendancePercentage;
+              maxAttendanceEvent = event;
+            }
+          }
+        });
+
+        
+        let minAttendance = Infinity;
+        let minAttendanceEvent = null;
+        data.events.forEach(event => {
+          const assistance = event.assistance || event.estimate;
+          if (typeof assistance === 'number') {
+            if (assistance < minAttendance) {
+              minAttendance = assistance;
+              minAttendanceEvent = event;
+            }
+          }
+        });
+
+        
+        let maxCapacity = 0;
+        let maxCapacityEvent = null;
+        data.events.forEach(event => {
+          const capacity = event.capacity;
+          if (typeof capacity === 'number') {
+            if (capacity > maxCapacity) {
+              maxCapacity = capacity;
+              maxCapacityEvent = event;
+            }
+          }
+        });
+
+        
+        const statisticsRow = document.createElement('tr');
+
+        const statisticsCell = document.createElement('td');
+        statisticsCell.colSpan = 3;
+        statisticsCell.textContent = 'Event Statistics';
+        statisticsCell.classList.add('text-center');
+        statisticsRow.appendChild(statisticsCell);
+
+        tableBody.appendChild(statisticsRow);
+
+        
+        const maxAttendanceRow = document.createElement('tr');
+        maxAttendanceRow.innerHTML = `<td>Lower Assistance Percentage</td>
+        <td><a href="details.html?id=${maxAttendanceEvent._id}" class="btn btn-primary">${maxAttendanceEvent.name}</a></td>
+                                       <td>${maxAttendancePercentage.toFixed(2)}%</td>`;
+        tableBody.appendChild(maxAttendanceRow);
+
+        
+        const minAttendanceRow = document.createElement('tr');
+        minAttendanceRow.innerHTML = `<td>Lower Assistance </td>
+        <td><a href="details.html?id=${minAttendanceEvent._id}" class="btn btn-primary">${minAttendanceEvent.name}</a></td>
+                                       <td>${minAttendance}</td>`;
+        tableBody.appendChild(minAttendanceRow);
+
+        
+        const maxCapacityRow = document.createElement('tr');
+        maxCapacityRow.innerHTML = `<td>Larger Capacity</td>
+        <td><a href="details.html?id=${maxCapacityEvent._id}" class="btn btn-primary">${maxCapacityEvent.name}</a></td>
+                                     <td>${maxCapacity}</td>`;
+        tableBody.appendChild(maxCapacityRow);
+      })
+      .catch(error => {
+        console.error('Error al obtener los eventos:', error);
+      });
+
+  </script>
+
 </body>
 
 </html>
