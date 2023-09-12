@@ -15,8 +15,7 @@ function generateCard(event) {
             </div>`;
   return card;
 }
-let originalData; // Variable global para almacenar los datos originales
-//const cardContainer = document.getElementById('cardContainer');
+let originalData; 
 function getData() {
   fetch("https://mindhub-xj03.onrender.com/api/amazing")
     .then((response) => {
@@ -27,7 +26,7 @@ function getData() {
     })
     .then((data) => {
       const eventData = data.events;
-      originalData = eventData; // Guardar los datos originales
+      originalData = eventData; 
       const cardContainer = document.getElementById("cardContainer");
 
       eventData.forEach((event) => {
@@ -37,7 +36,7 @@ function getData() {
 
       const categories = getUniqueCategories(eventData);
 
-      // Crear checkboxes con Bootstrap 5
+      
       const checkboxContainer = document.getElementById("checkboxContainer");
       categories.forEach((category) => {
         const checkboxDiv = document.createElement("div");
@@ -96,16 +95,16 @@ function filterByCategory(data) {
 }
 //RESET
 document.getElementById("resetFiltersBtn").addEventListener("click", function() {
-  // Desmarcar todos los checkboxes
+  
   const checkboxes = document.querySelectorAll('input[name="category"]');
   checkboxes.forEach(checkbox => {
       checkbox.checked = false;
   });
 
-  // Restablecer el campo de búsqueda
+  
   document.getElementById("searchInput").value = "";
 
-  // Volver a mostrar todos los eventos originales
+  
   const cardContainer = document.getElementById("cardContainer");
   cardContainer.innerHTML = "";
   originalData.forEach((event) => {
@@ -123,7 +122,7 @@ function search(data) {
   cardContainer.innerHTML = "";
 
   if (searchTerm === "") {
-    // Si el campo de búsqueda está vacío, mostrar todos los elementos
+    
     data.forEach(function (event) {
       var card = generateCard(event);
       cardContainer.innerHTML += card;
