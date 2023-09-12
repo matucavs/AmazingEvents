@@ -155,7 +155,7 @@ const searchButton = document.getElementById("searchButton");
 
 
 searchButton.addEventListener("click", handleSearch);
-
+searchInput.addEventListener("input", handleSearchInput);
 
 function handleSearch() {
   const searchValue = searchInput.value.toLowerCase();
@@ -174,4 +174,29 @@ function handleSearch() {
   });
 
   renderFilteredItems(filteredItems);
+  // Muestra la alerta si no se encontraron resultados
+  const noResultsAlert = document.getElementById("no-results-alert");
+  if (filteredItems.length === 0 && searchValue !== "") {
+    noResultsAlert.style.display = "block";
+  } else {
+    noResultsAlert.style.display = "none";
+  }
 }
+function handleSearchInput() {
+  if (searchInput.value === "") {
+    renderFilteredItems(items); // Restablece los elementos filtrados al estado inicial
+    hideNoResultsAlert();// Oculta la alerta de no resultados
+  }
+} 
+function hideNoResultsAlert() {
+  const noResultsAlert = document.getElementById("no-results-alert");
+  noResultsAlert.style.display = "none";
+}
+function clearSearchInput() {
+  searchInput.value = ""; // Limpia el valor del campo de búsqueda
+  renderFilteredItems(items); // Restablece los elementos filtrados al estado inicial
+  hideNoResultsAlert(); // Oculta la alerta de no resultados
+}
+const clearSearchButton = document.getElementById("no-results-alert");
+
+clearSearchButton.addEventListener("click", clearSearchInput);

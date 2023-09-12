@@ -16,34 +16,33 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
-            <a class="navbar-brand d-flex align-items-center" href="/"></a>
-            <img src="./img/amazing_brand.png" alt="aevents" width="120" height="30">
+            <a class="navbar-brand d-flex align-items-center " href="/"></a>
+            <div class="logo-container">
+                <h1 class="visually-hidden">Amazing Events</h1>
+                <img src="./img/amazing_brand.png" alt="aevents" width="120" height="30">
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav nav-underline ms-md-auto mb-2 mb-lg-0 px-lg-5">
+                <ul class="nav gap-3 ms-md-auto mt-4 mb-lg-2 px-lg-5">
                     <li class="nav-item">
                         <a class="btn btn-primary" href="index.html" role="button">Home</a>
-                        <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="upcoming.html" role="button">Upcoming Events</a>
-                        <!-- <a class="nav-link" href="upcoming.html">Upcoming Events</a> -->
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="past.html" role="button">Past Events</a>
-                        <!-- <a class="nav-link" href="past.html">Past Events</a> -->
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="contact.html" role="button">Contact</a>
-                        <!-- <a class="nav-link" href="contact.html">Contact</a> -->
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="stats.html" role="button">Stats</a>
-                        <!-- <a class="nav-link" href="stats.html">Stats</a> -->
                     </li>
                 </ul>
             </div>
@@ -64,21 +63,21 @@
                 <div class="carousel-item active">
                     <img src="./img/banner_6.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>DETAILS</h5>
+                        <h2 class="display-3">HOME</h2>
                         <p>Amazing Events</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="./img/banner_4.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>DETAILS</h5>
+                        <h2 class="display-3">HOME</h2>
                         <p>Some representative placeholder content for the second slide.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="./img/banner_3.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>DETAILS</h5>
+                        <h2 class="display-3">HOME</h2>
                         <p>Some representative placeholder content for the third slide.</p>
                     </div>
                 </div>
@@ -94,14 +93,13 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        
-        <!-- DETAILS -->
-        <div id="event-Carddetails" class="container-fluid">
-            <!-- <div class="row flex-wrap d-xl-flex d-flex justify-content-center"></div> -->
+        <div id="eventDetails" class="col">
+            <div class="card h-100">
+                
+                
+            </div>
         </div>
-
     </main>
-
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-1 border-top">
         <div class="col-md-4 d-flex align-items-center">
             <span class="mb-3 mb-md-0 text-muted ms-4">© 2023 Cohort 03</span>
@@ -112,14 +110,61 @@
             <li class="me-4"><a class="text-muted" href="#"><i class="fab fa-facebook"></i></a></li>
         </ul>
     </footer>
+    <!-- Bootstrap JS -->
 
-    <script src="./js/data.js"></script>
-    <script src="./js/details.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="./js/data.js"></script> -->
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var eventId = parseInt(urlParams.get('id')); // Parse el ID como un número entero
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-        </script>
-
+        function showEventDetails(event) {
+            var cardContainer = document.getElementById('eventDetails');
+    
+            var card = document.createElement('div');
+            card.classList.add('col');
+            card.classList.add('d-flex');
+            card.classList.add('justify-content-center'); // Centra el contenido
+    
+            card.innerHTML = `
+                <div class="card h-100" style="max-width: 25rem;"> <!-- Establece el ancho máximo -->
+                    <img src="${event.image}" class="card-img-top" alt="Card image">
+                    <div class="card-body">
+                        <h5 class="card-title">${event.name}</h5>
+                        <h6 class="card-title">${event.category}</h6>
+                        <p class="card-text">${event.description}</p>
+                        <p class="card-text">Place <span>${event.place}</span></p>
+                        <p class="card-text">Date <span>${event.date}</span></p>
+                        <p class="card-text">Capacity <span>${event.capacity}</span></p>
+                        
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <h6 class="text-muted">Price $${event.price}</h6>
+                    </div>
+                </div>`;
+    
+            cardContainer.appendChild(card);
+        }
+    
+        function getData() {
+            fetch('https://mindhub-xj03.onrender.com/api/amazing')
+                .then(response => response.json())
+                .then(data => {
+                    var event = data.events.find(event => event._id === eventId);
+                    if (event) {
+                        showEventDetails(event);
+                    } else {
+                        alert('Evento no encontrado.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    
+        getData();
+    </script>
+    
+    
+    
 </body>
 
 </html>

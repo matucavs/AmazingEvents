@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <title>Upcoming Events</title>
@@ -16,7 +16,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
-            <a class="navbar-brand d-flex align-items-center" href="/"></a>
+            <a class="navbar-brand d-flex align-items-center " href="/"></a>
             <div class="logo-container">
                 <h1 class="visually-hidden">Amazing Events</h1>
                 <img src="./img/amazing_brand.png" alt="aevents" width="120" height="30">
@@ -71,14 +71,14 @@
                     <img src="./img/banner_4.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h2 class="display-3">UPCOMING EVENTS</h2>
-                        <p>Amazing Events</p>
+                        <p>Some representative placeholder content for the second slide.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="./img/banner_3.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h2 class="display-3">UPCOMING EVENTS</h2>
-                        <p>Amazing Events</p>
+                        <p>Some representative placeholder content for the third slide.</p>
                     </div>
                 </div>
             </div>
@@ -93,59 +93,13 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <!-- Checkbox -->
-        <div id="container" class="container-fluid mt-1 pt-2 mb-2">
-            <div class="row flex-wrap d-xl-flex d-flex justify-content-center">
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <!-- Checkbox -->
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox">
-                        <label class="form-check-label" for="checkbox">
-                            Category
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox2">
-                        <label class="form-check-label" for="checkbox2">
-                            Category
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox3">
-                        <label class="form-check-label" for="checkbox3">
-                            Category
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox4">
-                        <label class="form-check-label" for="checkbox4">
-                            Category
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox5">
-                        <label class="form-check-label" for="checkbox5">
-                            Category
-                        </label>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-6">
-                    <!-- Buscador -->
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">Buscar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="input-group mt-2 mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Type anything">
+            <button class="btn btn-primary" type="button">Search</button>
         </div>
-        <!-- Cards -->
-        <div id="card-container" class="container-fluid">
-            <div class="row flex-wrap d-xl-flex d-flex justify-content-center"></div>
-        </div>
-    </main>
 
+        <div id="cardContainer" class="card-container mt-2 row row-cols-1 row-cols-md-4 g-4"></div>
+    </main>
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-1 border-top">
         <div class="col-md-4 d-flex align-items-center">
             <span class="mb-3 mb-md-0 text-muted ms-4">© 2023 Cohort 03</span>
@@ -156,11 +110,89 @@
             <li class="me-4"><a class="text-muted" href="#"><i class="fab fa-facebook"></i></a></li>
         </ul>
     </footer>
-    <script src="./js/data.js"></script>
-    <script src="./js/upcoming.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-        </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="./js/data.js"></script> -->
+    <script>
+        function generateCard(event) {
+            var card = `
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="${event.image}" class="card-img-top" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">${event.name}</h5>
+                            <p class="card-text">${event.description}</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <h6 class="text-muted">$${event.price}</h6>
+                            <a href="details.html?id=${event._id}" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>`;
+            return card;
+        }
+
+        const cardContainer = document.getElementById('cardContainer');
+
+        // Función para obtener los datos utilizando Fetch API
+        function getData() {
+    fetch('https://mindhub-xj03.onrender.com/api/amazing')
+        .then(response => response.json())
+        .then(data => {
+            var currentDate = new Date(data.currentDate);
+
+            data.events.forEach(function (event) {
+                var eventDate = new Date(event.date);
+
+                if (eventDate > currentDate) {
+                    var card = generateCard(event);
+                    cardContainer.innerHTML += card;
+                }
+            });
+
+            
+            document.getElementById('searchInput').addEventListener('input', () => {
+                search(data.events);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// SEARCH
+function search(data) {
+    var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    var cardContainer = document.getElementById('cardContainer');
+
+    cardContainer.innerHTML = '';
+
+    if (searchTerm === '') {
+        // Si el campo de búsqueda está vacío, mostrar todos los elementos
+        data.forEach(function (event) {
+            var card = generateCard(event);
+            cardContainer.innerHTML += card;
+        });
+    } else {
+        
+        var found = false;
+        data.forEach(function (event) {
+            if (event.name.toLowerCase().includes(searchTerm)) {
+                var card = generateCard(event);
+                cardContainer.innerHTML += card;
+                found = true;
+            }
+        });
+
+        if (!found) {
+            alert('No se encontraron resultados.');
+            document.getElementById('searchInput').value = ''; 
+            getData(); 
+        }
+    }
+}
+
+        getData();
+    </script>
+
 </body>
 
 </html>

@@ -93,26 +93,15 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <!-- Checkbox -->
-        <div id="filter-container" class="container-fluid mt-1 pt-2 mb-2">
-            <div class="row flex-wrap d-xl-flex d-flex justify-content-center">
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-6">
-                    <!-- Buscador -->
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Search">
-                        <button class="btn btn-primary" type="button" id="searchButton">Search</button>
-                    </div>
-                </div>
-            </div>
+        <div id="checkbox-container"></div>
+        <div class="input-group mt-2 mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Type anything">
+            <button class="btn btn-primary" type="button">Search</button>
         </div>
-        <!-- Cards -->
-        <div id="card-container" class="container-fluid">
-            <div class="row flex-wrap d-xl-flex d-flex justify-content-center"></div>
-        </div>
-    </main>
 
+
+        <div id="cardContainer" class="card-container mt-2 row row-cols-1 row-cols-md-4 g-4 mx-1"></div>
+    </main>
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-1 border-top">
         <div class="col-md-4 d-flex align-items-center">
             <span class="mb-3 mb-md-0 text-muted ms-4">© 2023 Cohort 03</span>
@@ -123,11 +112,82 @@
             <li class="me-4"><a class="text-muted" href="#"><i class="fab fa-facebook"></i></a></li>
         </ul>
     </footer>
-    <script src="./js/data.js"></script>
-    <script src="./js/home.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-        </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function generateCard(event) {
+            var card = `
+            <div class="col">
+                <div class="card h-100">
+                    <img src="${event.image}" class="card-img-top" alt="Card image">
+                    <div class="card-body">
+                        <h5 class="card-title">${event.name}</h5>
+                        <p class="card-text">${event.description}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <h6 class="text-muted">$${event.price}</h6>
+                        <a href="details.html?id=${event._id}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>`;
+            return card;
+        }
+
+        //const cardContainer = document.getElementById('cardContainer');
+        function getData() {
+            fetch('https://mindhub-xj03.onrender.com/api/amazing').then(response => { if (!response.ok) { throw new Error('La solicitud no fue exitosa'); } return response.json() }).then(data => {
+                const eventData = data.events; const originalData = eventData; const cardContainer = document.getElementById('cardContainer');
+
+
+                eventData.forEach(event => {
+                    const card = generateCard(event);
+                    cardContainer.innerHTML += card;
+                });
+
+                document.getElementById('searchInput').addEventListener('input', () => {
+                    search(eventData);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+
+        // SEARCH
+        function search(data) {
+            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            var cardContainer = document.getElementById('cardContainer');
+
+            cardContainer.innerHTML = '';
+
+            if (searchTerm === '') {
+                // Si el campo de búsqueda está vacío, mostrar todos los elementos
+                data.forEach(function (event) {
+                    var card = generateCard(event);
+                    cardContainer.innerHTML += card;
+                });
+            } else {
+
+                var found = false;
+                data.forEach(function (event) {
+                    if (event.name.toLowerCase().includes(searchTerm)) {
+                        var card = generateCard(event);
+                        cardContainer.innerHTML += card;
+                        found = true;
+                    }
+                });
+
+                if (!found) {
+                    alert('No se encontraron resultados.');
+                    document.getElementById('searchInput').value = '';
+                    getData();
+                }
+            }
+        }
+        getData(); 
+    </script>
 </body>
 
 </html>

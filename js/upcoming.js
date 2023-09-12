@@ -34,13 +34,4 @@ data.events.forEach((event, eventIndex) => {
   }
 });
 
-// Delete
-// const card1 = document.getElementById("card1");
-// const card2 = document.getElementById("card2");
-// const card3 = document.getElementById("card3");
-// const card4 = document.getElementById("card4");
-
-// card1.remove();
-// card2.remove();
-// card3.remove();
-// card4.remove();
+// card4.remove();   https://mindhub-xj03.onrender.com/api/amazing

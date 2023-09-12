@@ -27,5 +27,9 @@
 #event-Carddetails{
   max-width: 40rem;
 }
-
-
+#no-results-alert {
+  display: none;
+}
+.card-text span {
+  font-weight: bold;
+}
