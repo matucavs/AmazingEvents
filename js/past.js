@@ -18,7 +18,7 @@ function generateCard(event) {
 
 const cardContainer = document.getElementById("cardContainer");
 
-// Función para obtener los datos utilizando Fetch API
+
 function getData() {
   fetch("https://mindhub-xj03.onrender.com/api/amazing")
     .then((response) => response.json())

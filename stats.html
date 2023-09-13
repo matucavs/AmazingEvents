@@ -77,113 +77,115 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     
-    const tableBody = document.getElementById('eventTableBody');
+    //const tableBody = document.getElementById('eventTableBody');
 
     //Fetch
-    fetch('https://mindhub-xj03.onrender.com/api/amazing/')
-      .then(response => response.json())
-      .then(data => {
-        
+    // Obtener la tabla
+const tableBody = document.getElementById('eventTableBody');
+
+// Hacer fetch de los eventos desde la API
+fetch('https://mindhub-xj03.onrender.com/api/amazing/')
+    .then(response => response.json())
+    .then(data => {
+        // Filtrar eventos futuros y pasados
         const currentDate = new Date(data.currentDate);
         const upcomingEvents = data.events.filter(event => new Date(event.date) > currentDate);
         const pastEvents = data.events.filter(event => new Date(event.date) <= currentDate);
 
-        
+        // Función para agregar una fila a la tabla
         function addRow(category, revenues, attendance, capacity) {
-          const categoryRow = document.createElement('tr');
+            const categoryRow = document.createElement('tr');
 
-          const categoryCell = document.createElement('td');
-          categoryCell.textContent = category;
-          categoryRow.appendChild(categoryCell);
+            const categoryCell = document.createElement('td');
+            categoryCell.textContent = category;
+            categoryRow.appendChild(categoryCell);
 
-          const revenuesCell = document.createElement('td');
-          revenuesCell.textContent = '$' + revenues.toFixed(2);
-          categoryRow.appendChild(revenuesCell);
+            const revenuesCell = document.createElement('td');
+            revenuesCell.textContent = '$' + revenues.toFixed(2);
+            categoryRow.appendChild(revenuesCell);
 
-          const attendanceCell = document.createElement('td');
-          const attendancePercentage = ((attendance / capacity) * 100).toFixed(2);
-          attendanceCell.textContent = attendancePercentage + '%';
-          categoryRow.appendChild(attendanceCell);
+            const attendanceCell = document.createElement('td');
+            const attendancePercentage = ((attendance / capacity) * 100).toFixed(2);
+            attendanceCell.textContent = attendancePercentage + '%';
+            categoryRow.appendChild(attendanceCell);
 
-          tableBody.appendChild(categoryRow);
+            tableBody.appendChild(categoryRow);
         }
 
-        
+        // Procesar eventos futuros
         const categorizedDataUpcoming = {};
         upcomingEvents.forEach(event => {
-          const category = event.category;
-          const assistance = event.assistance || event.estimate;
-          const price = event.price;
-          const capacity = event.capacity;
+            const category = event.category;
+            const assistance = event.assistance || event.estimate;
+            const price = event.price;
+            const capacity = event.capacity;
 
-          if (typeof assistance === 'number' && typeof price === 'number' && typeof capacity === 'number') {
-            const eventRevenue = assistance * price;
+            if (typeof assistance === 'number' && typeof price === 'number' && typeof capacity === 'number') {
+                const eventRevenue = assistance * price;
 
-            if (!categorizedDataUpcoming[category]) {
-              categorizedDataUpcoming[category] = { revenues: 0, attendance: 0, capacity: 0 };
+                if (!categorizedDataUpcoming[category]) {
+                    categorizedDataUpcoming[category] = { revenues: 0, attendance: 0, capacity: 0 };
+                }
+
+                categorizedDataUpcoming[category].revenues += eventRevenue;
+                categorizedDataUpcoming[category].attendance += assistance;
+                categorizedDataUpcoming[category].capacity += capacity;
             }
-
-            categorizedDataUpcoming[category].revenues += eventRevenue;
-            categorizedDataUpcoming[category].attendance += assistance;
-            categorizedDataUpcoming[category].capacity += capacity;
-          }
         });
 
-        
-        tableBody.innerHTML += '<tr><th colspan="3" class="text-center">Upcoming Events Statistics</th></tr>';
+        // Agregar sección de "Upcoming Events"
+        tableBody.innerHTML += '<tr><th colspan="3" class="text-center">Upcoming Events</th></tr>';
         for (const category in categorizedDataUpcoming) {
-          const { revenues, attendance, capacity } = categorizedDataUpcoming[category];
-          addRow(category, revenues, attendance, capacity);
+            const { revenues, attendance, capacity } = categorizedDataUpcoming[category];
+            addRow(category, revenues, attendance, capacity);
         }
 
-        
+        // Procesar eventos pasados
         const categorizedDataPast = {};
         pastEvents.forEach(event => {
-          const category = event.category;
-          const assistance = event.assistance || event.estimate;
-          const price = event.price;
-          const capacity = event.capacity;
+            const category = event.category;
+            const assistance = event.assistance || event.estimate;
+            const price = event.price;
+            const capacity = event.capacity;
 
-          if (typeof assistance === 'number' && typeof price === 'number' && typeof capacity === 'number') {
-            const eventRevenue = assistance * price;
+            if (typeof assistance === 'number' && typeof price === 'number' && typeof capacity === 'number') {
+                const eventRevenue = assistance * price;
 
-            if (!categorizedDataPast[category]) {
-              categorizedDataPast[category] = { revenues: 0, attendance: 0, capacity: 0 };
+                if (!categorizedDataPast[category]) {
+                    categorizedDataPast[category] = { revenues: 0, attendance: 0, capacity: 0 };
+                }
+
+                categorizedDataPast[category].revenues += eventRevenue;
+                categorizedDataPast[category].attendance += assistance;
+                categorizedDataPast[category].capacity += capacity;
             }
-
-            categorizedDataPast[category].revenues += eventRevenue;
-            categorizedDataPast[category].attendance += assistance;
-            categorizedDataPast[category].capacity += capacity;
-          }
         });
 
-        
-        tableBody.innerHTML += '<tr><th colspan="3" class="text-center">Past Events Statistics</th></tr>';
+        // Agregar sección de "Past Events"
+        tableBody.innerHTML += '<tr><th colspan="3" class="text-center">Past Events</th></tr>';
         for (const category in categorizedDataPast) {
-          const { revenues, attendance, capacity } = categorizedDataPast[category];
-          addRow(category, revenues, attendance, capacity);
+            const { revenues, attendance, capacity } = categorizedDataPast[category];
+            addRow(category, revenues, attendance, capacity);
         }
 
-        
+        // Encontrar el evento con mayor porcentaje de asistencia entre los eventos pasados
         let maxAttendancePercentage = 0;
         let maxAttendanceEvent = null;
-        data.events.forEach(event => {
-          const assistance = event.assistance || event.estimate;
-          const capacity = event.capacity;
+        pastEvents.forEach(event => {
+            const assistance = event.assistance || event.estimate;
+            const capacity = event.capacity;
 
-          if (typeof assistance === 'number' && typeof capacity === 'number') {
-            const attendancePercentage = (assistance / capacity) * 100;
-            if (attendancePercentage > maxAttendancePercentage) {
-              maxAttendancePercentage = attendancePercentage;
-              maxAttendanceEvent = event;
+            if (typeof assistance === 'number' && typeof capacity === 'number') {
+                const attendancePercentage = (assistance / capacity) * 100;
+                if (attendancePercentage > maxAttendancePercentage) {
+                    maxAttendancePercentage = attendancePercentage;
+                    maxAttendanceEvent = event;
+                }
             }
-          }
         });
-
-        
         let minAttendance = Infinity;
         let minAttendanceEvent = null;
-        data.events.forEach(event => {
+        pastEvents.forEach(event => {
           const assistance = event.assistance || event.estimate;
           if (typeof assistance === 'number') {
             if (assistance < minAttendance) {
@@ -206,25 +208,29 @@
           }
         });
 
-        
+
+
+
+        // Agregar fila de "Event Statistics"
         const statisticsRow = document.createElement('tr');
 
         const statisticsCell = document.createElement('td');
         statisticsCell.colSpan = 3;
         statisticsCell.textContent = 'Event Statistics';
-        statisticsCell.classList.add('text-center');
         statisticsRow.appendChild(statisticsCell);
-
+        statisticsCell.classList.add('text-center');
         tableBody.appendChild(statisticsRow);
 
-        
-        const maxAttendanceRow = document.createElement('tr');
-        maxAttendanceRow.innerHTML = `<td>Highest Assistance Percentage</td>
-        <td><a href="details.html?id=${maxAttendanceEvent._id}" class="btn btn-primary">${maxAttendanceEvent.name}</a></td>
-                                       <td>${maxAttendancePercentage.toFixed(2)}%</td>`;
-        tableBody.appendChild(maxAttendanceRow);
-
-        
+        // Agregar fila con el evento de mayor porcentaje de asistencia entre los eventos pasados
+        if (maxAttendanceEvent) {
+            const maxAttendanceRow = document.createElement('tr');
+            maxAttendanceRow.innerHTML = `<td>Mayor Porcentaje de Asistencia (Pasado)</td>
+            <td><a href="details.html?id=${maxAttendanceEvent._id}" class="btn btn-primary">${maxAttendanceEvent.name}</a></td>
+                                           <td>${maxAttendancePercentage.toFixed(2)}%</td>`;
+            tableBody.appendChild(maxAttendanceRow);
+        } else {
+            console.warn('No se encontraron eventos pasados para calcular el porcentaje de asistencia máximo.');
+        };
         const minAttendanceRow = document.createElement('tr');
         minAttendanceRow.innerHTML = `<td>Lower Assistance </td>
         <td><a href="details.html?id=${minAttendanceEvent._id}" class="btn btn-primary">${minAttendanceEvent.name}</a></td>
@@ -237,10 +243,11 @@
         <td><a href="details.html?id=${maxCapacityEvent._id}" class="btn btn-primary">${maxCapacityEvent.name}</a></td>
                                      <td>${maxCapacity}</td>`;
         tableBody.appendChild(maxCapacityRow);
-      })
-      .catch(error => {
+      
+    })
+    .catch(error => {
         console.error('Error al obtener los eventos:', error);
-      });
+    });
 
   </script>
 
